@@ -7,6 +7,15 @@ services:
     ports:
       - "5672:5672"    # Standard AMQP Port
       - "15672:15672"  # Management Console Port
+    expose:
+      - '5432'
+      - '15672'
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - amqp_network
+networks:
+  amqp_network:
+    name: amqp_network
+    driver: bridge
